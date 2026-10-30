@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Retiro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:#191919}</style>
+</head>
+<body>
+<div id="pyf-calc" class="pyf">
+<style>
+#pyf-calc{--bg:#191919;--cd:#222;--ln:#363636;--mu:#a8a8a8;--ac:#6EE7B7;--wa:#FBBF24;--er:#F87171;background:var(--bg);color:#fff;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;padding:28px 22px;max-width:760px;margin:0 auto;line-height:1.5;box-sizing:border-box;border-radius:14px}
+#pyf-calc *{box-sizing:border-box;font-family:inherit}
+#pyf-calc h1{font-size:28px;font-weight:700;margin:0 0 6px;letter-spacing:-.02em}
+#pyf-calc h2{font-size:19px;font-weight:600;margin:0 0 16px;letter-spacing:-.01em}
+#pyf-calc .sub{color:var(--mu);margin:0 0 22px;font-size:15px}
+#pyf-calc .cd{background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:20px;margin-bottom:16px}
+#pyf-calc .f{margin-bottom:20px}#pyf-calc .f:last-child{margin-bottom:0}
+#pyf-calc label,#pyf-calc .lb{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
+#pyf-calc .ds{color:var(--mu);font-size:13px;margin:0 0 8px}
+#pyf-calc .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#pyf-calc .v{color:var(--ac);font-weight:600;white-space:nowrap}
+#pyf-calc .rg{display:flex;justify-content:space-between;color:var(--mu);font-size:12px;margin-top:6px}
+#pyf-calc input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;margin:10px 0 0;outline:none;background:linear-gradient(to right,var(--ac) var(--p,50%),#3d3d3d var(--p,50%))}
+#pyf-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--ac);cursor:pointer}
+#pyf-calc input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--ac);cursor:pointer}
+#pyf-calc input[type=range]::-moz-range-track{background:transparent}
+#pyf-calc .in{display:flex;align-items:center;background:#161616;border:1px solid var(--ln);border-radius:8px;padding:0 12px}
+#pyf-calc .in:focus-within{border-color:var(--ac)}
+#pyf-calc .in span{color:var(--mu);font-size:14px;white-space:nowrap}
+#pyf-calc .in input,#pyf-calc select{flex:1;min-width:0;background:transparent;border:0;color:#fff;font-size:16px;padding:12px 8px;outline:none}
+#pyf-calc select{width:100%;background:#161616;border:1px solid var(--ln);border-radius:8px;padding:12px;cursor:pointer}
+#pyf-calc select:focus{border-color:var(--ac)}
+#pyf-calc .pp{max-width:140px}
+#pyf-calc .tg{display:flex;gap:8px;margin:12px 0 10px;flex-wrap:wrap}
+#pyf-calc .tg button{flex:1;min-width:140px;background:#161616;color:#fff;border:1px solid var(--ln);border-radius:8px;padding:12px;font-size:15px;font-weight:500;cursor:pointer}
+#pyf-calc .tg button[aria-pressed=true]{background:var(--ac);color:#111;border-color:var(--ac);font-weight:600}
+#pyf-calc button:focus-visible,#pyf-calc input[type=range]:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+#pyf-calc .fx{color:var(--mu);font-size:12px;letter-spacing:.04em;margin:0}
+#pyf-calc .st{border-radius:10px;padding:14px 16px;margin-bottom:16px;font-weight:600;border:1px solid}
+#pyf-calc .st.ok{color:var(--ac);border-color:var(--ac);background:rgba(110,231,183,.08)}
+#pyf-calc .st.wa{color:var(--wa);border-color:var(--wa);background:rgba(251,191,36,.08)}
+#pyf-calc .st.er{color:var(--er);border-color:var(--er);background:rgba(248,113,113,.08)}
+#pyf-calc .st small{display:block;font-weight:400;color:#d4d4d4;margin-top:2px}
+#pyf-calc .gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px}
+#pyf-calc .m{background:#161616;border:1px solid var(--ln);border-radius:10px;padding:12px 14px}
+#pyf-calc .m b{display:block;font-size:18px;font-weight:600}
+#pyf-calc .m span{color:var(--mu);font-size:13px}
+#pyf-calc .ch{position:relative;margin-top:6px}
+#pyf-calc .ch svg{width:100%;height:auto;display:block;touch-action:pan-y}
+#pyf-calc .tp{position:absolute;top:8px;transform:translateX(-50%);background:#0f0f0f;border:1px solid var(--ln);border-radius:8px;padding:8px 10px;font-size:12px;pointer-events:none;white-space:nowrap;display:none;z-index:2}
+#pyf-calc .tp b{color:var(--ac)}
+#pyf-calc .sm{display:inline-flex;gap:6px;margin-bottom:8px}
+#pyf-calc .sm button{background:#161616;color:var(--mu);border:1px solid var(--ln);border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer}
+#pyf-calc .sm button[aria-pressed=true]{color:#111;background:var(--ac);border-color:var(--ac);font-weight:600}
+#pyf-calc details{color:var(--mu);font-size:13px;margin-top:14px}
+#pyf-calc summary{cursor:pointer;color:#fff;font-weight:500}
+#pyf-calc details p{margin:8px 0}
+#pyf-calc .lg{color:var(--mu);font-size:12px;margin:18px 0 0}
+</style>
+
+<h1>Calculadora de Retiro</h1>
+<p class="sub">Proyecta cómo podrían crecer tus ahorros y si te alcanzarán durante tu jubilación.</p>
+
+<div class="cd">
+  <div class="lb">Moneda de visualización. ¿Quieres calcular tu jubilación en dólares o en pesos?</div>
+  <div class="tg" role="group" aria-label="Moneda de visualización">
+    <button type="button" data-cur="USD" aria-pressed="true">Dólares (USD)</button>
+    <button type="button" data-cur="COP" aria-pressed="false">Pesos colombianos (COP)</button>
+  </div>
+  <p class="fx">TIPO DE CAMBIO FIJO DE VISUALIZACIÓN · 1 USD = 4.000 COP</p>
+</div>
+
+<div class="cd">
+  <h2>Información Básica</h2>
+  <div class="f">
+    <div class="row"><label for="pyf-age">Edad Actual</label><span class="v" data-k="ageV"></span></div>
+    <input type="range" id="pyf-age" data-k="age" min="18" max="75" step="1" value="35">
+    <div class="rg"><span>18</span><span>75</span></div>
+  </div>
+  <div class="f">
+    <div class="row"><label for="pyf-ret">Edad de Jubilación</label><span class="v" data-k="retV"></span></div>
+    <input type="range" id="pyf-ret" data-k="ret" min="36" max="89" step="1" value="65">
+    <div class="rg"><span data-k="retMin">36</span><span>89</span></div>
+  </div>
+  <div class="f">
+    <div class="row"><label for="pyf-proj">Edad Proyectada</label><span class="v" data-k="projV"></span></div>
+    <input type="range" id="pyf-proj" data-k="proj" min="66" max="95" step="1" value="90">
+    <div class="rg"><span data-k="projMin">66</span><span>95</span></div>
+  </div>
+  <div class="f">
+    <label for="pyf-inc">Ingresos Mensuales</label>
+    <div class="in"><span class="pre">US$</span><input id="pyf-inc" data-k="inc" data-m inputmode="numeric" autocomplete="off" value="0"></div>
+  </div>
+</div>
+
+<div class="cd">
+  <h2>Capital y Ahorro</h2>
+  <div class="f">
+    <label for="pyf-sav">¿Cuánto tienes ahorrado para tu jubilación en este momento?</label>
+    <p class="ds">Aquí cuenta tus ahorros en efectivo, cuentas de ahorro, pólizas de inversión a largo plazo y cuentas de ahorro dedicadas SOLAMENTE para tu jubilación.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-sav" data-k="sav" data-m inputmode="numeric" autocomplete="off" value="0"></div>
+  </div>
+  <div class="f">
+    <label for="pyf-g1">Crecimiento de tus ahorros de jubilación</label>
+    <p class="ds">Rendimiento anual esperado. Máximo 9 %, solo números enteros.</p>
+    <div class="in pp"><input id="pyf-g1" data-k="g1" data-p inputmode="numeric" autocomplete="off" value="5"><span>%</span></div>
+  </div>
+  <div class="f">
+    <label for="pyf-inv">¿Cuánto tienes en otras cuentas de inversión?</label>
+    <p class="ds">Aquí cuenta tus acciones, bonos, renta fija, CDTs y pólizas de inversión a corto plazo.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-inv" data-k="inv" data-m inputmode="numeric" autocomplete="off" value="0"></div>
+  </div>
+  <div class="f">
+    <label for="pyf-g2">Crecimiento de tus inversiones</label>
+    <p class="ds">Rendimiento anual esperado. Máximo 9 %, solo números enteros.</p>
+    <div class="in pp"><input id="pyf-g2" data-k="g2" data-p inputmode="numeric" autocomplete="off" value="5"><span>%</span></div>
+  </div>
+  <div class="f">
+    <label for="pyf-con">¿Cuánto aportas mensualmente a tus ahorros de jubilación e inversiones?</label>
+    <div class="in"><span class="pre">US$</span><input id="pyf-con" data-k="con" data-m inputmode="numeric" autocomplete="off" value="0"></div>
+  </div>
+</div>
+
+<div class="cd">
+  <h2>Estilo de Vida</h2>
+  <div class="f">
+    <label for="pyf-lvl">Selecciona el nivel de gasto que deseas mantener en tu retiro:</label>
+    <select id="pyf-lvl" data-k="lvl">
+      <option value="0.6">Esencial - Cubrir necesidades básicas y vivienda</option>
+      <option value="0.8" selected>Actual - Mantener mi nivel de vida actual</option>
+      <option value="1">Abundante - Viajar, pasatiempos y mayor confort</option>
+    </select>
+  </div>
+</div>
+
+<div class="cd">
+  <h2>Variables</h2>
+  <div class="f">
+    <label for="pyf-inf">Inflación</label>
+    <p class="ds">Aumento anual promedio de los precios. Máximo 9 %, solo números enteros.</p>
+    <div class="in pp"><input id="pyf-inf" data-k="inf" data-p inputmode="numeric" autocomplete="off" value="3"><span>%</span></div>
+  </div>
+  <div class="f">
+    <label for="pyf-gar">Ingreso Mensual Garantizado en tu Jubilación</label>
+    <p class="ds">Ingresa aquí cuánto vas a recibir de pensiones, Colpensiones, IESS o cualquier ingreso mensual garantizado en tu jubilación.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-gar" data-k="gar" data-m inputmode="numeric" autocomplete="off" value="0"></div>
+  </div>
+</div>
+
+<div class="cd" aria-live="polite">
+  <h2>Tu proyección</h2>
+  <div class="st ok" data-k="status"></div>
+  <div class="gr" data-k="metrics"></div>
+  <div class="sm" role="group" aria-label="Valores del gráfico">
+    <button type="button" data-real="0" aria-pressed="true">Dinero futuro</button>
+    <button type="button" data-real="1" aria-pressed="false">Dinero de hoy</button>
+  </div>
+  <div class="ch" data-k="chart"></div>
+  <details>
+    <summary>Supuestos del modelo</summary>
+    <p>Proyección determinista anual: usa los rendimientos e inflación que ingresas, sin simular escenarios de mercado.</p>
+    <p>Los ahorros y aportes se registran al cierre de cada año. Los aportes se reparten entre tus ahorros de jubilación y tus inversiones en proporción a sus saldos actuales (50/50 si ambos son cero) y se mantienen fijos.</p>
+    <p>A partir de la edad de jubilación, el crecimiento de ambas cuentas baja a 4 % anual. Los retiros salen primero de tus inversiones y luego de tus ahorros de jubilación.</p>
+    <p>La meta de gasto es un porcentaje de tus ingresos actuales (60 %, 80 % o 100 %) y se ajusta por inflación cada año. Se le resta tu ingreso mensual garantizado, que se asume ajustado por inflación. Los impuestos y comisiones no están incluidos.</p>
+  </details>
+  <p class="lg">Esta calculadora es una herramienta educativa y no constituye asesoría financiera, de inversión, fiscal ni legal. Los resultados son proyecciones basadas en los supuestos que ingresas y no garantizan resultados futuros.</p>
+</div>
+
+<script>
+(function(){
+var R=document.getElementById('pyf-calc'),RATE=4000,cur='USD',real=false,CS=null;
+function $(k){return R.querySelector('[data-k="'+k+'"]')}
+function num(e){return Number((e.value||'').replace(/\D/g,''))||0}
+function fmt(n){return Math.round(n).toLocaleString('es-CO')}
+function usd(v){return cur==='USD'?v:v/RATE}
+function M(u){return cur==='USD'?'US$ '+fmt(u):'$ '+fmt(u*RATE)+' COP'}
+function C(u){var v=cur==='USD'?u:u*RATE,p=cur==='USD'?'US$ ':'$ ',s;
+ if(v>=1e9)s=(v/1e9).toFixed(1).replace('.',',')+' mil M';
+ else if(v>=1e6)s=(v/1e6).toFixed(1).replace('.',',')+' M';
+ else if(v>=1e3)s=Math.round(v/1e3)+' mil';
+ else s=Math.round(v);
+ return p+s}
+function pct(k){var v=$(k).value;return v===''?0:Math.min(9,+v)}
+
+function sync(){
+ var a=+$('age').value,r=$('ret'),p=$('proj');
+ r.min=a+1;if(+r.value<a+1)r.value=a+1;
+ p.min=+r.value+1;if(+p.value<+r.value+1)p.value=+r.value+1;
+ $('retMin').textContent=r.min;$('projMin').textContent=p.min;
+ ['age','ret','proj'].forEach(function(k){var e=$(k);
+  $(k+'V').textContent=e.value+' años';
+  e.style.setProperty('--p',((e.value-e.min)/(e.max-e.min)*100)+'%')});
+}
+
+function calc(){
+ var a0=+$('age').value,ret=+$('ret').value,pj=+$('proj').value,
+ inc=usd(num($('inc')))*12,spend=inc*(+$('lvl').value),guar=usd(num($('gar')))*12,
+ need=Math.max(0,spend-guar),S1=usd(num($('sav'))),S2=usd(num($('inv'))),
+ c=usd(num($('con')))*12,g1=pct('g1')/100,g2=pct('g2')/100,inf=pct('inf')/100,
+ w1=(S1+S2)>0?S1/(S1+S2):.5,rows=[{age:a0,bal:S1+S2,real:S1+S2}],dep=null;
+ for(var a=a0;a<pj;a++){
+  var n=a-a0+1;
+  S1*=1+(a<ret?g1:.04);S2*=1+(a<ret?g2:.04);
+  if(a<ret){S1+=c*w1;S2+=c*(1-w1)}
+  else{
+   var w=need*Math.pow(1+inf,n),t=Math.min(S2,w);S2-=t;w-=t;
+   var t2=Math.min(S1,w);S1-=t2;w-=t2;
+   if(w>0.5&&dep===null)dep=a+1;
+  }
+  var b=S1+S2;rows.push({age:a+1,bal:b,real:b/Math.pow(1+inf,n)});
+ }
+ return{rows:rows,a0:a0,ret:ret,pj:pj,spend:spend,guar:guar,need:need,dep:dep,inc:inc};
+}
+
+function render(){
+ var d=calc(),rr=d.rows.filter(function(r){return r.age===d.ret})[0],last=d.rows[d.rows.length-1],st=$('status');
+ if(d.need===0){st.className='st ok';st.innerHTML='Tu ingreso garantizado cubre tu meta de gasto.<small>No necesitas retirar de tus ahorros para mantener el nivel de gasto que elegiste.</small>'}
+ else if(d.dep!==null){st.className='st '+(d.dep<d.pj-5?'er':'wa');st.innerHTML='Tus ahorros se agotarían a los '+d.dep+' años.<small>Tu edad proyectada es '+d.pj+'. Prueba aumentar tu aporte, retrasar tu jubilación o ajustar tu nivel de gasto.</small>'}
+ else{st.className='st ok';st.innerHTML='Tus ahorros alcanzan hasta los '+d.pj+' años.<small>Te quedarían '+M(last.bal)+' al final de la proyección (valor futuro).</small>'}
+ var items=[['Capital al jubilarte (valor futuro)',M(rr.bal)],['Capital al jubilarte (dinero de hoy)',M(rr.real)],
+ ['Gasto anual deseado en la jubilación (dinero de hoy)',M(d.spend)],['Ingreso garantizado anual (dinero de hoy)',M(d.guar)],
+ ['Retiro anual de tus ahorros (dinero de hoy)',M(d.need)],['Saldo a la edad proyectada (valor futuro)',M(last.bal)]];
+ $('metrics').innerHTML=items.map(function(i){return '<div class="m"><span>'+i[0]+'</span><b>'+i[1]+'</b></div>'}).join('');
+ if(d.inc===0&&d.need===0&&d.guar===0)st.innerHTML='Ingresa tus ingresos mensuales.<small>Con ellos calculamos la meta de gasto para tu jubilación.</small>';
+ draw(d);
+}
+
+function draw(d){
+ var W=640,H=300,pl=70,pr=16,pt=16,pb=34,rows=d.rows,vals=rows.map(function(r){return real?r.real:r.bal}),
+ mx=(Math.max.apply(null,vals)||1)*1.08,x0=rows[0].age,x1=rows[rows.length-1].age;
+ function X(a){return pl+(a-x0)/(x1-x0)*(W-pl-pr)}
+ function Y(v){return pt+(1-v/mx)*(H-pt-pb)}
+ var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Trayectoria de tu patrimonio por edad">';
+ for(var i=0;i<=4;i++){var v=mx*i/4,y=Y(v);
+  s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y+'" y2="'+y+'" stroke="#363636"/><text x="'+(pl-8)+'" y="'+(y+4)+'" fill="#a8a8a8" font-size="11" text-anchor="end">'+C(v)+'</text>'}
+ var step=Math.max(1,Math.round((x1-x0)/6));
+ for(var a=x0;a<=x1;a+=step)s+='<text x="'+X(a)+'" y="'+(H-12)+'" fill="#a8a8a8" font-size="11" text-anchor="middle">'+a+'</text>';
+ var ln=rows.map(function(r,i){return(i?'L':'M')+X(r.age).toFixed(1)+' '+Y(vals[i]).toFixed(1)}).join('');
+ s+='<path d="'+ln+'L'+X(x1)+' '+Y(0)+'L'+X(x0)+' '+Y(0)+'Z" fill="rgba(110,231,183,.12)"/>';
+ s+='<path d="'+ln+'" fill="none" stroke="#6EE7B7" stroke-width="2.5" stroke-linejoin="round"/>';
+ s+='<line x1="'+X(d.ret)+'" x2="'+X(d.ret)+'" y1="'+pt+'" y2="'+Y(0)+'" stroke="#FBBF24" stroke-dasharray="4 4"/><text x="'+X(d.ret)+'" y="'+(pt+10)+'" fill="#FBBF24" font-size="11" text-anchor="'+(d.ret-x0>(x1-x0)/2?'end':'start')+'" dx="'+(d.ret-x0>(x1-x0)/2?-5:5)+'">Jubilación</text>';
+ if(d.dep!==null)s+='<circle cx="'+X(d.dep)+'" cy="'+Y(0)+'" r="5" fill="#F87171"/>';
+ s+='<line class="hl" y1="'+pt+'" y2="'+Y(0)+'" stroke="#fff" stroke-opacity=".5" style="display:none"/><circle class="hc" r="5" fill="#fff" stroke="#6EE7B7" stroke-width="3" style="display:none"/></svg><div class="tp"></div>';
+ $('chart').innerHTML=s;
+ CS={rows:rows,vals:vals,x0:x0,x1:x1,pl:pl,pr:pr,W:W,X:X,Y:Y};
+}
+
+function hover(e){
+ if(!CS)return;
+ var box=$('chart'),svg=box.querySelector('svg'),rc=svg.getBoundingClientRect(),pt=e.touches?e.touches[0]:e,
+ fx=(pt.clientX-rc.left)/rc.width*CS.W,age=Math.round(CS.x0+(fx-CS.pl)/(CS.W-CS.pl-CS.pr)*(CS.x1-CS.x0));
+ age=Math.max(CS.x0,Math.min(CS.x1,age));
+ var r=CS.rows[age-CS.x0],x=CS.X(age),hl=svg.querySelector('.hl'),hc=svg.querySelector('.hc'),tp=box.querySelector('.tp');
+ hl.setAttribute('x1',x);hl.setAttribute('x2',x);hl.style.display='';
+ hc.setAttribute('cx',x);hc.setAttribute('cy',CS.Y(CS.vals[age-CS.x0]));hc.style.display='';
+ tp.style.display='block';tp.style.left=Math.max(15,Math.min(85,x/CS.W*100))+'%';
+ tp.innerHTML='Edad '+age+'<br><b>'+M(r.bal)+'</b> (valor futuro)<br>'+M(r.real)+' (dinero de hoy)';
+}
+function leave(){var b=$('chart'),h=b.querySelector('.hl'),c=b.querySelector('.hc'),t=b.querySelector('.tp');if(h)h.style.display='none';if(c)c.style.display='none';if(t)t.style.display='none'}
+var ch=$('chart');
+ch.addEventListener('mousemove',hover);ch.addEventListener('mouseleave',leave);
+ch.addEventListener('touchstart',hover,{passive:true});ch.addEventListener('touchmove',hover,{passive:true});ch.addEventListener('touchend',leave);
+
+R.querySelectorAll('input[type=range]').forEach(function(e){e.addEventListener('input',function(){sync();render()})});
+R.querySelectorAll('[data-m]').forEach(function(e){
+ e.addEventListener('input',function(){var d=e.value.replace(/\D/g,'').slice(0,12);e.value=d===''?'':fmt(+d);render()});
+ e.addEventListener('focus',function(){e.select()});
+ e.addEventListener('blur',function(){if(e.value==='')e.value='0'});
+});
+R.querySelectorAll('[data-p]').forEach(function(e){
+ e.addEventListener('input',function(){var d=e.value.replace(/\D/g,'').slice(-1);e.value=d===''?'':String(Math.min(9,+d));render()});
+ e.addEventListener('focus',function(){e.select()});
+ e.addEventListener('blur',function(){if(e.value==='')e.value='0'});
+});
+$('lvl').addEventListener('change',render);
+R.querySelectorAll('[data-cur]').forEach(function(b){b.addEventListener('click',function(){
+ var nc=b.getAttribute('data-cur');if(nc===cur)return;
+ var ks=['inc','sav','inv','con','gar'],old=ks.map(function(k){return usd(num($(k)))});
+ cur=nc;
+ ks.forEach(function(k,i){$(k).value=fmt(cur==='USD'?old[i]:old[i]*RATE)});
+ R.querySelectorAll('.pre').forEach(function(e){e.textContent=cur==='USD'?'US$':'COP $'});
+ R.querySelectorAll('[data-cur]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ render();
+})});
+R.querySelectorAll('[data-real]').forEach(function(b){b.addEventListener('click',function(){
+ real=b.getAttribute('data-real')==='1';
+ R.querySelectorAll('[data-real]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ render();
+})});
+sync();render();
+})();
+</script>
+</div>
+</body>
+</html>
