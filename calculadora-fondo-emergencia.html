@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Fondo de Emergencia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0;background:#191919}</style>
+</head>
+<body>
+<div id="pyf-calc" class="pyf">
+<style>
+#pyf-calc{--bg:#191919;--cd:#222;--ln:#363636;--mu:#a8a8a8;--ac:#6EE7B7;--big:#FBBF24;background:var(--bg);color:#fff;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;padding:28px 22px;max-width:760px;margin:0 auto;line-height:1.5;box-sizing:border-box}
+#pyf-calc *{box-sizing:border-box;font-family:inherit}
+#pyf-calc h1{font-size:28px;font-weight:700;margin:0 0 6px;letter-spacing:-.02em}
+#pyf-calc h2{font-size:19px;font-weight:600;margin:0 0 16px;letter-spacing:-.01em}
+#pyf-calc h3{font-size:16px;font-weight:600;margin:0 0 8px}
+#pyf-calc .sub{color:var(--mu);margin:0 0 22px;font-size:15px}
+#pyf-calc .cd{background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:20px;margin-bottom:16px}
+#pyf-calc .f{margin-bottom:20px}#pyf-calc .f:last-child{margin-bottom:0}
+#pyf-calc label,#pyf-calc .lb{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
+#pyf-calc .ds{color:var(--mu);font-size:13px;margin:0 0 8px}
+#pyf-calc .in{display:flex;align-items:center;background:#161616;border:1px solid var(--ln);border-radius:8px;padding:0 12px}
+#pyf-calc .in:focus-within{border-color:var(--ac)}
+#pyf-calc .in span{color:var(--mu);font-size:14px;white-space:nowrap}
+#pyf-calc .in input{flex:1;min-width:0;background:transparent;border:0;color:#fff;font-size:16px;padding:12px 8px;outline:none}
+#pyf-calc .tg{display:flex;gap:8px;margin:12px 0 10px;flex-wrap:wrap}
+#pyf-calc .tg button{flex:1;min-width:140px;background:#161616;color:#fff;border:1px solid var(--ln);border-radius:8px;padding:12px;font-size:15px;font-weight:500;cursor:pointer}
+#pyf-calc .tg button[aria-pressed=true]{background:var(--ac);color:#111;border-color:var(--ac);font-weight:600}
+#pyf-calc button:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+#pyf-calc .fx{color:var(--mu);font-size:12px;letter-spacing:.04em;margin:0}
+#pyf-calc .go{width:100%;background:var(--ac);color:#111;border:0;border-radius:10px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;margin-bottom:16px}
+#pyf-calc .go:hover{filter:brightness(1.08)}
+#pyf-calc .er{color:#F87171;font-size:14px;margin:-6px 0 14px;display:none}
+#pyf-calc .res{display:none}
+#pyf-calc .hero{text-align:center;padding:10px 0 20px}
+#pyf-calc .hero p{margin:0;color:var(--mu);font-size:14px}
+#pyf-calc .big{display:block;color:var(--big);font-size:clamp(34px,9vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:8px 0;word-break:break-word}
+#pyf-calc .hero .ex{color:#e6e6e6;font-size:15px;max-width:520px;margin:6px auto 0}
+#pyf-calc .gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:8px 0 18px}
+#pyf-calc .m{background:#161616;border:1px solid var(--ln);border-radius:10px;padding:12px 14px}
+#pyf-calc .m b{display:block;font-size:18px;font-weight:600}
+#pyf-calc .m span{color:var(--mu);font-size:13px}
+#pyf-calc .br{margin:6px 0 4px}
+#pyf-calc .bl{display:flex;justify-content:space-between;font-size:13px;gap:10px}
+#pyf-calc .bl span:last-child{color:var(--mu);white-space:nowrap}
+#pyf-calc .bt{height:8px;background:#363636;border-radius:4px;margin:4px 0 12px;overflow:hidden}
+#pyf-calc .bt i{display:block;height:100%;background:var(--ac);border-radius:4px}
+#pyf-calc ul{margin:0;padding-left:20px;color:#e0e0e0;font-size:14px}
+#pyf-calc li{margin-bottom:6px}
+#pyf-calc .nt{border-left:3px solid var(--big);padding:2px 0 2px 14px;margin:16px 0;color:#e6e6e6;font-size:14px}
+#pyf-calc .lg{color:var(--mu);font-size:12px;margin:18px 0 0}
+</style>
+
+<h1>Calculadora de Fondo de Emergencia</h1>
+<p class="sub">Descubre cuánto dinero necesitas tener guardado para estar tranquilo ante cualquier imprevisto.</p>
+
+<div class="cd">
+  <div class="lb">Moneda de visualización. ¿Quieres calcular tus ahorros de emergencia en dólares o en pesos?</div>
+  <div class="tg" role="group" aria-label="Moneda de visualización">
+    <button type="button" data-cur="USD" aria-pressed="true">Dólares (USD)</button>
+    <button type="button" data-cur="COP" aria-pressed="false">Pesos colombianos (COP)</button>
+  </div>
+  <p class="fx">TIPO DE CAMBIO FIJO DE VISUALIZACIÓN · 1 USD = 4.000 COP</p>
+</div>
+
+<div class="cd">
+  <h2>Tus gastos mensuales</h2>
+  <p class="ds" style="margin-bottom:18px">Ingresa lo que gastas en promedio cada mes. Si no tienes un gasto, déjalo en 0.</p>
+  <div class="f"><label for="pyf-rent">Arriendo o cuota de la hipoteca</label>
+    <div class="in"><span class="pre">US$</span><input id="pyf-rent" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-util">Servicios públicos</label><p class="ds">Luz, agua y gas.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-util" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-tel">Telefonía, internet y TV</label><p class="ds">Celular, internet en casa y televisión por cable o streaming.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-tel" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-ins">Seguros</label><p class="ds">Carro, salud y hogar.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-ins" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-trn">Transporte</label><p class="ds">Cuota del carro, gasolina y transporte público.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-trn" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-dbt">Pagos de deudas</label><p class="ds">Tarjetas de crédito y préstamos. No incluyas la hipoteca, que ya la pusiste arriba.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-dbt" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-gro">Mercado y comida</label><p class="ds">Lo que gastas en el supermercado cada mes.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-gro" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+  <div class="f"><label for="pyf-oth">Otros gastos</label><p class="ds">Educación, cuidado de hijos o mascotas, medicinas y cualquier otro gasto necesario.</p>
+    <div class="in"><span class="pre">US$</span><input id="pyf-oth" data-m inputmode="numeric" autocomplete="off" value="0"></div></div>
+</div>
+
+<button type="button" class="go" id="pyf-go">Calcular</button>
+<p class="er" id="pyf-er" role="alert">Ingresa al menos un gasto mensual para calcular tu fondo de emergencia.</p>
+
+<div class="cd res" id="pyf-res" aria-live="polite">
+  <div class="hero">
+    <p>Tu fondo de emergencia ideal</p>
+    <span class="big" id="pyf-big"></span>
+    <p class="ex" id="pyf-ex"></p>
+  </div>
+  <div class="gr" id="pyf-gr"></div>
+
+  <h3>¿En qué se va tu dinero cada mes?</h3>
+  <div id="pyf-bk"></div>
+
+  <div class="nt">Este monto equivale a <b>6 meses</b> de tus gastos. Es una meta muy común entre los planificadores financieros: te da tiempo para encontrar un nuevo empleo, recuperarte de un problema de salud o resolver un gasto inesperado sin endeudarte.</div>
+
+  <h3>Tu fondo debe ser líquido y de fácil acceso</h3>
+  <p class="ds">Es dinero para emergencias reales, así que tiene que estar disponible rápido y sin perder valor.</p>
+  <ul>
+    <li><b>Disponible en uno o dos días,</b> sin trámites complicados.</li>
+    <li><b>Sin riesgo de perder valor:</b> evita acciones, criptomonedas o inversiones que suben y bajan.</li>
+    <li><b>Sin penalización por retirarlo:</b> ten cuidado con inversiones a plazo fijo que te cobran por sacar el dinero antes de tiempo.</li>
+    <li><b>Separado de tu cuenta del día a día,</b> para no gastarlo sin darte cuenta.</li>
+  </ul>
+
+  <h3 style="margin-top:18px">Cómo empezar</h3>
+  <ul>
+    <li>No tienes que juntarlo todo de una vez. Empieza con una meta de <b>1 mes</b> de gastos y ve sumando.</li>
+    <li>Si tus ingresos son variables, trabajas por cuenta propia o tienes personas que dependen de ti, considera tener más de 6 meses.</li>
+    <li>Cuando uses el fondo, haz de tu prioridad volver a llenarlo.</li>
+  </ul>
+  <p class="lg">Esta calculadora es una herramienta educativa y no constituye asesoría financiera, de inversión, fiscal ni legal. Los resultados son estimaciones basadas en los datos que ingresas.</p>
+</div>
+
+<script>
+(function(){
+var R=document.getElementById('pyf-calc'),RATE=4000,cur='USD',done=false;
+var CAT=[['pyf-rent','Arriendo o hipoteca'],['pyf-util','Servicios públicos'],['pyf-tel','Telefonía, internet y TV'],['pyf-ins','Seguros'],['pyf-trn','Transporte'],['pyf-dbt','Pagos de deudas'],['pyf-gro','Mercado y comida'],['pyf-oth','Otros gastos']];
+function $(id){return document.getElementById(id)}
+function num(e){return Number((e.value||'').replace(/\D/g,''))||0}
+function fmt(n){return Math.round(n).toLocaleString('es-CO')}
+function usd(v){return cur==='USD'?v:v/RATE}
+function M(u){return cur==='USD'?'US$ '+fmt(u):'$ '+fmt(u*RATE)+' COP'}
+
+function render(){
+ var rows=CAT.map(function(c){return{n:c[1],v:usd(num($(c[0])))}}),tot=rows.reduce(function(s,r){return s+r.v},0);
+ if(tot<=0){$('pyf-er').style.display='block';$('pyf-res').style.display='none';done=false;return false}
+ $('pyf-er').style.display='none';
+ $('pyf-big').textContent=M(tot*6);
+ $('pyf-ex').textContent='Es el resultado de multiplicar tus gastos mensuales ('+M(tot)+') por 6 meses.';
+ $('pyf-gr').innerHTML=[['Mínimo recomendado (3 meses)',M(tot*3)],['Con más holgura (9 meses)',M(tot*9)],['Gastos mensuales',M(tot)],['Gastos anuales',M(tot*12)]]
+  .map(function(i){return '<div class="m"><span>'+i[0]+'</span><b>'+i[1]+'</b></div>'}).join('');
+ rows=rows.filter(function(r){return r.v>0}).sort(function(a,b){return b.v-a.v});
+ $('pyf-bk').innerHTML=rows.map(function(r){var p=r.v/tot*100;
+  return '<div class="br"><div class="bl"><span>'+r.n+'</span><span>'+M(r.v)+' · '+p.toFixed(0)+' %</span></div><div class="bt"><i style="width:'+p.toFixed(1)+'%"></i></div></div>'}).join('');
+ $('pyf-res').style.display='block';done=true;return true;
+}
+
+R.querySelectorAll('[data-m]').forEach(function(e){
+ e.addEventListener('input',function(){var d=e.value.replace(/\D/g,'').slice(0,12);e.value=d===''?'':fmt(+d);if(done)render()});
+ e.addEventListener('focus',function(){e.select()});
+ e.addEventListener('blur',function(){if(e.value==='')e.value='0'});
+});
+$('pyf-go').addEventListener('click',function(){
+ if(render())$('pyf-res').scrollIntoView({behavior:'smooth',block:'start'});
+});
+R.querySelectorAll('[data-cur]').forEach(function(b){b.addEventListener('click',function(){
+ var nc=b.getAttribute('data-cur');if(nc===cur)return;
+ var els=Array.prototype.slice.call(R.querySelectorAll('[data-m]')),old=els.map(function(e){return usd(num(e))});
+ cur=nc;
+ els.forEach(function(e,i){e.value=fmt(cur==='USD'?old[i]:old[i]*RATE)});
+ R.querySelectorAll('.pre').forEach(function(e){e.textContent=cur==='USD'?'US$':'COP $'});
+ R.querySelectorAll('[data-cur]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ if(done)render();
+})});
+})();
+</script>
+</div>
+</body>
+</html>
